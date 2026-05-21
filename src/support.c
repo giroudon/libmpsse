@@ -5,6 +5,8 @@
  * 27 December 2011
  */
 
+#include <stdio.h>
+#include <malloc.h>
 #include <string.h>
 
 #if LIBFTDI1 == 1
@@ -53,7 +55,7 @@ int raw_read(struct mpsse_context *mpsse, unsigned char *buf, int size)
 			 * 
 			 * Is this needed anymore? It slows down repetitive read operations by ~8%.
 			 */
-			ftdi_usb_purge_rx_buffer(&mpsse->ftdi);
+			ftdi_tcioflush(&mpsse->ftdi);
 		}
 	}
 
