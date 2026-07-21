@@ -111,7 +111,7 @@ enum i2c_ack
 	NACK = 1
 };
 
-#define DEFAULT_TRIS            (SK | DO | CS | GPIO0 | GPIO1 | GPIO2 | GPIO3)  /* SK/DO/CS and GPIOs are outputs, DI is an input */
+#define DEFAULT_TRIS            (SK | DO | CS)                                  /* SK/DO/CS are outputs, DI is an input */
 #define DEFAULT_PORT            (SK | CS)       				/* SK and CS are high, all others low */
 
 enum mpsse_commands
@@ -204,6 +204,7 @@ int ReadPins(struct mpsse_context *mpsse);
 int PinState(struct mpsse_context *mpsse, int pin, int state);
 int Tristate(struct mpsse_context *mpsse);
 char Version(void);
+void SetDefaultTristate(uint8_t tris);
 
 #ifdef SWIGPYTHON
 typedef struct swig_string_data

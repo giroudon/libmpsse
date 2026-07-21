@@ -38,6 +38,13 @@ struct vid_pid supported_devices[] = {
 			{ 0, 0, NULL }
 };
 
+static uint8_t default_tris = DEFAULT_TRIS;
+
+void SetDefaultTristate(uint8_t tris)
+{
+        default_tris = tris;
+}
+
 /*
  * Opens and initializes the first FTDI device found.
  * 
@@ -272,7 +279,7 @@ int SetMode(struct mpsse_context *mpsse, int endianess)
 		mpsse->txrx = MPSSE_DO_WRITE | MPSSE_DO_READ | endianess;
 
 		/* Clock, data out, chip select pins are outputs; all others are inputs. */
-		mpsse->tris = DEFAULT_TRIS;
+		mpsse->tris = default_tris;
 
 		/* Clock and chip select pins idle high; all others are low */
 		mpsse->pidle = mpsse->pstart = mpsse->pstop = DEFAULT_PORT;
